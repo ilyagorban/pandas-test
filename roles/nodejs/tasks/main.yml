@@ -1,5 +1,5 @@
 ---
-- name: Install dependencies
+- name: Install nodejs, npm
   become: yes
   apt: pkg={{item}} state=installed
   with_items:

@@ -1,0 +1,12 @@
+---
+- name: copy counter-panda app
+  copy: src=counter-panda-app dest=/tmp/ owner=root group=root mode=0755
+
+- name: launching counter-panda service
+  shell: cd /tmp/counter-panda-app/; python launch_service.py &
+
+- name: test counter-panda service
+  shell: cd /tmp/counter-panda-app/; python test_service.py
+  register: command_result
+  failed_when: "'Exception' in command_result.stderr"
+

@@ -1,14 +1,17 @@
----
-- name: Common tasks FTW
+- become: true
   hosts: all
-  become: yes
+  name: Common tasks FTW
   pre_tasks:
-    - name: Set hostname
-      hostname: name={{inventory_hostname}}
-
-- name: Base bamboo service
+  - {hostname: 'name={{inventory_hostname}}', name: Set hostname}
+- become: true
   hosts: base
-  become: yes
+  name: Counter-panda service
   roles:
-    - { role: nodejs, tags: nodejs }
-    - { role: bamboo, tags: bamboo }
+  - {role: python, tags: python}
+  - {role: counter-panda, tags: counter-panda}
+- become: true
+  hosts: base
+  name: Gify-panda service
+  roles:
+  - {role: python, tags: python}
+  - {role: gify-panda, tags: gify-panda}

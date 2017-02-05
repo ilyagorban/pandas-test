@@ -1,0 +1,17 @@
+You can launch 3 services:
+- bamboo-app (basic original nodejs service, fixed initializer of dispatcher class)
+- gify-panda-app (service of random picture of pandas)
+- counter-panda-app (service of counting post requests)
+
+To enable launching of any of the services (all three or some subset of them):
+- you need to add relevant task with its roles from base.yml
+
+Testing of services implemented in python, and the testing is launched via Ansible tasks.
+
+Reload /Enable / Disable of services can be done with command 'vagrant reload --provision'
+Notes:
+- gify-panda and counter panda are working standalone, but it does not work when running from vagrant. I've stopped with solution as it started to take too much time (more than 2 hour). As solution could be:
+    - correct configuration of apache + wsgi
+- Also I found that both services are not running side-by-side. As solution could be the following:
+    - changing ports for each of the services in Vagrant file
+    - implementation of modularity of the services + main service that will run enabled services.

@@ -1,0 +1,10 @@
+---
+- name: Install pip
+  become: yes
+  apt: pkg=python-setuptools state=installed
+
+- name: Install modules - flask, requests
+  pip: name={{item}} state=latest
+  with_items:
+    - flask
+    - requests

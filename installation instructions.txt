@@ -1,0 +1,30 @@
+ubuntu 14.04.05 lts 64bit
+sudo apt update
+sudo apt install virtualbox git -y
+
+sudo apt install python-setuptools python-dev sshpass build-essential libssl-dev libffi-dev autoconf g++ python2.7-dev -y
+sudo easy_install pip
+sudo -H pip install -I paramiko pyyaml jinja2 httplib2 six>=1.6.0
+sudo -H pip install ansible==2.1
+
+wget https://releases.hashicorp.com/vagrant/1.9.1/vagrant_1.9.1_x86_64.deb
+sudo dpkg -i vagrant_1.9.1_x86_64.deb
+sudo apt-get install -f
+
+git clone --bare https://github.com/bigpandaio/devops-exercise.git
+cd devops-exercise.git/
+git push --mirror https://github.com/ilyagorban/pandas-test.git
+cd ..
+rm -rf old-repository.git
+git clone https://github.com/ilyagorban/pandas-test.git
+cd pandas-test
+
+vagrant up base
+# vagrant reload --provision # when reloading fixed files...
+vagrant ssh base
+nodejs /tmp/bamboo-app/bamboo.js
+
+================================
+for automated deploy:
+sudo pip install python-vagrant
+

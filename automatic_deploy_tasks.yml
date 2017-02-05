@@ -1,0 +1,20 @@
+- name: Base bamboo service
+  hosts: base
+  become: yes
+  roles:
+    - { role: nodejs, tags: nodejs }
+    - { role: bamboo, tags: bamboo }
+
+- name: Counter-panda service
+  hosts: base
+  become: yes
+  roles:
+    - { role: python, tags: python }
+    - { role: counter-panda, tags: counter-panda }
+
+- name: Gify-panda service
+  hosts: base
+  become: yes
+  roles:
+    - { role: python, tags: python }
+    - { role: gify-panda, tags: gify-panda }

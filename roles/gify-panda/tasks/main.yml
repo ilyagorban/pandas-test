@@ -1,0 +1,14 @@
+---
+- name: copy gify-panda app
+  copy: src=gify-panda-app dest=/tmp/ owner=root group=root mode=0755
+
+- name: launching gify-panda service
+  shell: cd /tmp/gify-panda-app/; python launch_service.py &
+  register: launching
+
+- debug: msg="{{ launching.stdout }}"
+
+- name: test gify-panda launched
+  shell: cd /tmp/gify-panda-app/; python test_service.py
+  register: command_result
+  failed_when: "'wrong response' in command_result.stderr"
